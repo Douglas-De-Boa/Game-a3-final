@@ -79,10 +79,7 @@ class Cena2 extends Phaser.Scene {
         this.load.image("tigre", "./assets/img/conteudo/icones/tigre.png");
         this.load.image("uva", "./assets/img/conteudo/icones/uva.png");
         this.load.image("vaca", "./assets/img/conteudo/icones/vaca.png");
-        this.load.image(
-            "botaovoltar",
-            "./assets/img/conteudo/BOTÃO/botaoVoltar.png"
-        );
+
         this.load.image(
             "botaoConfirmarVerde",
             "./assets/img/conteudo/BOTÃO/palavraCerta.png"
@@ -321,7 +318,7 @@ class Cena2 extends Phaser.Scene {
                 console.log(`Letra destruída: ${letra.texture.key}`);
             }
         });
-        this.botaoApagar = this.add.image(900, 850, "botaoApagar1Letra"); // Substitua "botaoplay" pela imagem do botão desejado
+        this.botaoApagar = this.add.image(800, 880, "botaoApagar1Letra"); // Substitua "botaoplay" pela imagem do botão desejado
         this.botaoApagar.setInteractive().setScale(0.5); // Tornar o botão interativo e ajustar o tamanho
         this.botaoApagar.on("pointerdown", () => {
             this.removerUltimaLetra();
@@ -339,15 +336,15 @@ class Cena2 extends Phaser.Scene {
 
         // Criar o personagem com física
         this.botaoConfirmarVerde = this.add.image(
-            600,
-            600,
+            100,
+            100,
             "botaoConfirmarVerde"
         );
         this.botaoConfirmarVerde.setVisible(false).setScale(0.5);
 
         this.botaoConfirmarVermelho = this.add.image(
-            600,
-            600,
+            100,
+            100,
             "botaoConfirmarVermelho"
         );
         this.botaoConfirmarVermelho.setVisible(false).setScale(0.5);
@@ -527,21 +524,6 @@ class Cena2 extends Phaser.Scene {
             .setOrigin(0.5)
             .setVisible(false); // A imagem começa invisível
 
-        // Criar o botão de voltar, mas também escondido inicialmente
-        this.botaovoltar = this.add
-            .image(
-                this.cameras.main.centerX,
-                this.cameras.main.centerY + 100,
-                "botaovoltar"
-            )
-            .setOrigin(0.5)
-            .setInteractive({ useHandCursor: true })
-            .setDepth(100) // Garante que está acima de outros elementos
-            .setVisible(false);
-        // O botão começa invisível
-
-        // Adicionar interatividade no botão de voltar
-
         this.palavraImagemAtual = "";
         this.jogoTerminado = false;
     }
@@ -582,17 +564,6 @@ class Cena2 extends Phaser.Scene {
         this.physics.pause();
         this.limparLetras();
         this.fimJogoImagem.setVisible(true);
-
-        this.botaovoltar
-            .setVisible(true)
-            .setInteractive({ useHandCursor: true })
-            .setDepth(100);
-
-        this.botaovoltar.removeAllListeners(); // Remove eventos antigos
-        this.botaovoltar.on("pointerdown", () => {
-            console.log("Botão Voltar clicado!");
-            this.scene.start("CenaPF");
-        });
 
         this.add
             .text(
@@ -915,9 +886,9 @@ class Cena2 extends Phaser.Scene {
         }
 
         const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""); // Letras disponíveis
-        const numLetras = Phaser.Math.Between(4, 6); // Número aleatório de letras a serem geradas (entre 5 e 10)
+        const numLetras = Phaser.Math.Between(3, 6); // Número aleatório de letras a serem geradas (entre 5 e 10)
         const espacamento = 130; // Espaçamento entre as letras
-        let x = Phaser.Math.Between(180, 900); // Posição X inicial aleatória
+        let x = Phaser.Math.Between(200, 900); // Posição X inicial aleatória
         let y = -50; // Posição inicial da letra fora da tela
         const larguraTela = this.sys.game.config.width; // Largura da tela
 
