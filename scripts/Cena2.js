@@ -3,7 +3,7 @@ class Cena2 extends Phaser.Scene {
         super({ key: "Cena2" });
         this.player = null;
         this.letras = null;
-        this.timeLeft = 5;
+        this.timeLeft = 500;
         this.startTimer = 3;
         this.timerText = null;
         this.gameStarted = false;
@@ -915,7 +915,7 @@ class Cena2 extends Phaser.Scene {
         }
 
         const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""); // Letras disponíveis
-        const numLetras = Phaser.Math.Between(5, 8); // Número aleatório de letras a serem geradas (entre 5 e 10)
+        const numLetras = Phaser.Math.Between(4, 6); // Número aleatório de letras a serem geradas (entre 5 e 10)
         const espacamento = 130; // Espaçamento entre as letras
         let x = Phaser.Math.Between(180, 900); // Posição X inicial aleatória
         let y = -50; // Posição inicial da letra fora da tela
