@@ -5,8 +5,7 @@ class CenaPF extends Phaser.Scene {
     }
 
     preload() {
-        // Substitua pelo caminho real da imagem do botão
-        this.load.image("botaoplay", "./assets/img/conteudo/BOTÃO/playjg.png"); // Substitua pelo caminho real da imagem do botão
+        this.load.image("botaoplay", "./assets/img/conteudo/BOTÃO/playjg.png");
         this.load.tilemapTiledJSON("mapa", "./map-professor-att.json");
         this.load.image(
             "CFS1",
@@ -52,8 +51,8 @@ class CenaPF extends Phaser.Scene {
             "BN",
             "./assets/img/conteudo/PERSONAGEM/george_0.png",
             {
-                frameWidth: 92, // Largura de cada quadro
-                frameHeight: 92, // Altura de cada quadro
+                frameWidth: 92,
+                frameHeight: 92,
             }
         );
     }
@@ -104,37 +103,30 @@ class CenaPF extends Phaser.Scene {
             0,
             0
         );
-        //this.add.image(400, 300, "bgC1");
 
-        // Criar o personagem com física
         this.player = this.physics.add.sprite(800, 800, "BN");
-        this.player.setCollideWorldBounds(true); // Impede que o personagem saia da tela
-        this.player.setVelocity(0); // Inicia sem velocidade
+        this.player.setCollideWorldBounds(true);
+        this.player.setVelocity(0);
 
-        // Habilita colisão para as camadas desejadas
-        mesas_alunos.setCollisionByExclusion([-1]); // Colisões em mesas de alunos
-        parede.setCollisionByExclusion([-1]); // Colisões em paredes
+        mesas_alunos.setCollisionByExclusion([-1]);
+        parede.setCollisionByExclusion([-1]);
         mesa_professor.setCollisionByExclusion([-1]);
-        // Criar o personagem com física
 
-        // Colisão entre o jogador e as camadas
         this.physics.add.collider(this.player, mesas_alunos);
         this.physics.add.collider(this.player, mesa_professor);
 
         this.physics.add.collider(this.player, parede);
-        // Criar as teclas de controle
+
         this.cursors = this.input.keyboard.createCursorKeys();
         const botaoplay = this.add.image(350, 50, "botaoplay").setInteractive();
         botaoplay.setInteractive({ useHandCursor: true });
-        botaoplay.setDepth(100); // Garante que está acima de outros elementos
-        botaoplay.setPosition(460, 100); // Define a profundidade para estar acima de outras camadas
+        botaoplay.setDepth(100);
+        botaoplay.setPosition(460, 100);
 
-        // Evento de clique para mudar de cena
         botaoplay.on("pointerdown", () => {
             this.scene.start("Cena2");
         });
 
-        // Animação para movimento para baixo (quadros 0, 4, 8, 12)
         this.anims.create({
             key: "down",
             frames: this.anims.generateFrameNumbers("BN", {
@@ -144,7 +136,6 @@ class CenaPF extends Phaser.Scene {
             repeat: -1,
         });
 
-        // Animação para movimento para cima (quadros 1, 5, 9, 13)
         this.anims.create({
             key: "up",
             frames: this.anims.generateFrameNumbers("BN", {
@@ -154,7 +145,6 @@ class CenaPF extends Phaser.Scene {
             repeat: -1,
         });
 
-        // Animação para movimento para a esquerda (quadros 2, 6, 10, 14)
         this.anims.create({
             key: "left",
             frames: this.anims.generateFrameNumbers("BN", {
@@ -164,7 +154,6 @@ class CenaPF extends Phaser.Scene {
             repeat: -1,
         });
 
-        // Animação para movimento para a direita (quadros 3, 7, 11, 15)
         this.anims.create({
             key: "right",
             frames: this.anims.generateFrameNumbers("BN", {
@@ -176,24 +165,21 @@ class CenaPF extends Phaser.Scene {
     }
 
     update() {
-        // Reseta a velocidade do personagem a cada frame
         this.player.setVelocity(0);
 
-        // Movimenta o personagem com as setas e aplica as animações
         if (this.cursors.left.isDown) {
-            this.player.setVelocityX(-160); // Para mover para a esquerda
-            this.player.anims.play("left", true); // Toca a animação 'left'
+            this.player.setVelocityX(-160);
+            this.player.anims.play("left", true);
         } else if (this.cursors.right.isDown) {
-            this.player.setVelocityX(160); // Para mover para a direita
-            this.player.anims.play("right", true); // Toca a animação 'right'
+            this.player.setVelocityX(160);
+            this.player.anims.play("right", true);
         } else if (this.cursors.up.isDown) {
-            this.player.setVelocityY(-160); // Para mover para cima
-            this.player.anims.play("up", true); // Toca a animação 'up'
+            this.player.setVelocityY(-160);
+            this.player.anims.play("up", true);
         } else if (this.cursors.down.isDown) {
-            this.player.setVelocityY(160); // Para mover para baixo
-            this.player.anims.play("down", true); // Toca a animação 'down'
+            this.player.setVelocityY(160);
+            this.player.anims.play("down", true);
         } else {
-            // Se nenhuma tecla estiver pressionada, pare a animação
             this.player.anims.stop();
         }
     }
